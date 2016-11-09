@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="forum">
+<head>
+    <meta charset="UTF-8">
+    <title>Fora by Robusta Code</title>
+    <link rel="stylesheet" type="text/css" href="../css/fora.css"/>
+    <title>Forum</title>
+
+    <script type="text/javascript" src="../javascripts/libs/angular.min.js"></script>
+    <script type="text/javascript" src="../javascripts/mock-data.js"></script>
+    <script type="text/javascript" src="forum.js"></script>
+
+    <style>
+        .like{
+            color : green;
+        }
+        .dislike{
+             color: red;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div ng-controller="ForumController">
+
+    <h2>Liste des utilisateurs :</h2>
+    <ul>
+        <li ng-repeat="user in users">
+            {{user.id}} : {{user.name}} ({{user.email}})
+        </li>
+    </ul>
+
+
+<br/>
+
+<div ng-repeat="topic in topics">
+
+        <h3>TITRE TOPIC : {{topic.title}}</h3>
+        <u>Commentaires :</u>
+        <li ng-repeat="comment in topic.comments">
+            {{comment.content}}
+            <br/>
+            Auteur : {{!comment.user.name ? "Anonymous" : comment.user.name}}
+        </li>
+
+</div>
+
+
+</body>
+
+
+
+</html>
