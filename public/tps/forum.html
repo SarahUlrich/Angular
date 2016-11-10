@@ -10,6 +10,7 @@
     <script type="text/javascript" src="../javascripts/mock-data.js"></script>
     <script type="text/javascript" src="forum.js"></script>
 
+
     <style>
         .like{
             color : green;
@@ -17,6 +18,8 @@
         .dislike{
              color: red;
         }
+
+
 
     </style>
 
@@ -35,18 +38,21 @@
 
 <br/>
 
-<div ng-repeat="topic in topics">
+    <h3>Sélectionnez un topic :</h3>
+    <select ng-model="model.selectedTopic" ng-options="topic.title for topic in topics"> </select>
+    <h3> {{model.selectedTopic.title}} </h3>
 
-        <h3>TITRE TOPIC : {{topic.title}}</h3>
-        <u>Commentaires :</u>
-        <li ng-repeat="comment in topic.comments">
-            {{comment.content}}
-            <br/>
-            Auteur : {{!comment.user.name ? "Anonymous" : comment.user.name}}
+    <ul>
+        <li ng-repeat="comment in model.selectedTopic.comments">
+            {{!comment.user.name ? "Anonymous" : comment.user.name}} : {{comment.content}}
         </li>
+    </ul>
 
-</div>
-
+    <form novalidate>
+        <select ng-model="commentModel.user" ng-options="user.name for user in users"></select>
+        <textarea ng-model="commentModel.content" required></textarea>
+        <button ng-click='createComment(commentModel)'>Submit</button>
+    </form>
 
 </body>
 

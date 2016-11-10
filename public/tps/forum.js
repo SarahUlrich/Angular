@@ -1,6 +1,19 @@
 angular.module("forum", [])
     .controller("ForumController", function($scope, $http, userService)  {
 
+        $scope.model = {
+            selectedTopic : undefined,
+            commentModel : undefined
+        }
+
+        $scope.createComment = function(commentModel){
+            $scope.model.selectedTopic.comments
+                .push(angular.copy(commentModel));
+            $scope.commentModel = {};
+        }
+
+        $scope.topics = globals.topics;
+
         $scope.users = globals.users;
 
         $scope.getAdmins = function(users){
@@ -9,7 +22,6 @@ angular.module("forum", [])
             });
         };
 
-        $scope.topics = globals.topics;
 
     })
     
